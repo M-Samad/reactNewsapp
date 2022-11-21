@@ -28,7 +28,7 @@ const App = () => {
               key="general"
               pageSize={pageSize}
               country="in"
-              category="general"
+              category="top"
             />
           </Route>
           <Route exact path="/business">

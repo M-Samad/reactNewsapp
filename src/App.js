@@ -21,11 +21,11 @@ const App = () => {
         <Navbar />
         <LoadingBar height={3} color="#f11946" progress={progress} />
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/reactNewsapp">
             <News
               setProgress={setProgress}
               apiKey={apiKey}
-              key="general"
+              key="top"
               pageSize={pageSize}
               country="in"
               category="top"

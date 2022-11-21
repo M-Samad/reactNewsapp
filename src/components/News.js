@@ -12,7 +12,7 @@ const News = (props) => {
 
   const updateNews = async () => {
     props.setProgress(10);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    const url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&country=${props.country}&category=${props.category}&page=${page}`;
     setLoading(true);
 
     let data = await fetch(url);
@@ -21,7 +21,7 @@ const News = (props) => {
 
     console.log(url);
     console.log(parsedData);
-    setArticles(parsedData.articles);
+    setArticles(parsedData.results);
     setTotalResults(parsedData.totalResults);
     setLoading(false);
 
@@ -34,17 +34,15 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${
-      props.country
-    }&category=${props.category}&apiKey=${props.apiKey}&page=${
-      page + 1
-    }&pageSize=${props.pageSize}`;
+    const url = `https://newsdata.io/api/1/news?apikey=${
+      props.apiKey
+    }&country=${props.country}&category=${props.category}&page=${page + 1}`;
     let data = await fetch(url);
     setPage(page + 1);
 
     let parsedData = await data.json();
 
-    setArticles(articles.concat(parsedData.articles));
+    setArticles(articles.concat(parsedData.results));
     setTotalResults(parsedData.totalResults);
   };
 
@@ -71,7 +69,7 @@ const News = (props) => {
           <div className="row">
             {articles.map((element) => {
               return (
-                <div className="col-md-4" key={element.url}>
+                <div className="col-md-4" key={element.link}>
                   <NewsItem
                     title={element.title ? element.title.slice(0, 45) : ""}
                     description={
@@ -79,11 +77,11 @@ const News = (props) => {
                         ? element.description.slice(0, 88)
                         : ""
                     }
-                    imageUrl={element.urlToImage}
-                    newsUrl={element.url}
-                    author={element.author}
-                    date={element.publishedAt}
-                    source={element.source.name}
+                    imageUrl={element.image_url}
+                    newsUrl={element.link}
+                    author={element.creator}
+                    date={element.pubDate}
+                    source={element.source_id}
                   />
                 </div>
               );

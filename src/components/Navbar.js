@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
-const Navbar = () => {
+const Navbar = ({ search, setSearch }) => {
   return (
     <div>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -63,6 +64,9 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
+            <Link className="nav-link" to={`/${search}`}>
+              <Search search={search} setSearch={setSearch} />
+            </Link>
           </div>
         </div>
       </nav>

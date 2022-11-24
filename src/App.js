@@ -7,8 +7,10 @@ import LoadingBar from "react-top-loading-bar";
 
 const App = () => {
   const pageSize = 20;
-  const apiKey = "pub_1373209636411ebe3b2d7828ea6b7d06d876b";
+  const apiKey = "b10bf4355532495e92c7b0c2b129d09c";
   const [progress, setProgress] = useState(0);
+  const [search, setSearch] = useState("");
+  console.log(search);
   // pageSize = 5;
   // apiKey = process.env.REACT_APP_NEWS_API;
   // state = {
@@ -18,9 +20,23 @@ const App = () => {
   return (
     <div>
       <Router>
-        <Navbar />
+        <Navbar search={search} setSearch={setSearch} />
         <LoadingBar height={3} color="#f11946" progress={progress} />
         <Switch>
+          {search && (
+            <Route exact path={`/${search}`}>
+              <News
+                setProgress={setProgress}
+                apiKey={apiKey}
+                key="search"
+                pageSize={pageSize}
+                country="in"
+                category="search"
+                query={search}
+                setSearch={setSearch}
+              />
+            </Route>
+          )}
           <Route exact path="/reactNewsapp">
             <News
               setProgress={setProgress}
@@ -28,7 +44,7 @@ const App = () => {
               key="top"
               pageSize={pageSize}
               country="in"
-              category="top"
+              category="general"
             />
           </Route>
           <Route exact path="/business">

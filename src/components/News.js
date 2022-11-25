@@ -37,6 +37,7 @@ const News = (props) => {
 
   useEffect(() => {
     document.title = `${props.category} - JhunjhunewalaNews`;
+    updateNews();
   }, []);
 
   const fetchMoreData = async () => {

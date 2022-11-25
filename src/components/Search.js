@@ -5,12 +5,9 @@ function Search({ setSearch }) {
   const [inputText, setInputText] = useState("");
 
   const submitBtn = async (e) => {
-    localStorage.clear();
-    localStorage.setItem("search", inputText);
-    const input = localStorage.getItem("search");
     await setSearch("");
     e.preventDefault();
-    setSearch(localStorage.getItem("search"));
+    setSearch(inputText);
   };
 
   return (

@@ -36,12 +36,7 @@ const News = (props) => {
   };
 
   useEffect(() => {
-    async function fetchData() {
-      document.title = `${props.category} - JhunjhunewalaNews`;
-      await props.setSearch(localStorage.getItem("search"));
-      updateNews();
-    }
-    fetchData();
+    document.title = `${props.category} - JhunjhunewalaNews`;
   }, []);
 
   const fetchMoreData = async () => {

@@ -11,45 +11,60 @@ const News = (props) => {
   const [totalResults, setTotalResults] = useState(0);
 
   const updateNews = async () => {
+    console.log(props.query);
     props.setProgress(10);
-    const url = `https://newsapi.org/v2/${
-      props.query ? `everything` : `top-headlines`
-    }?${
+    const url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&${
       props.query
         ? `q=${props.query}`
-        : `country=${props.country}&category=${props.category}&page=${page}`
-    }${``}&apikey=${props.apiKey}`;
+        : `category=${props.category}&country=${props.country}&page=${page}`
+    }`;
+    // const url = `https://newsapi.org/v2/${
+    //   props.query ? `everything` : `top-headlines`
+    // }?${
+    //   props.query
+    //     ? `q=${props.query}`
+    //     : `country=${props.country}&category=${props.category}&page=${page}`
+    // }${``}&apikey=${props.apiKey}`;
     setLoading(true);
     console.log(url);
     let data = await fetch(url);
     props.setProgress(30);
     let parsedData = await data.json();
 
-    setArticles(parsedData.articles);
+    setArticles(parsedData.results);
     setTotalResults(parsedData.totalResults);
     setLoading(false);
     props.setProgress(100);
   };
 
   useEffect(() => {
-    document.title = `${props.category} - JhunjhunewalaNews`;
-    updateNews();
+    async function fetchData() {
+      document.title = `${props.category} - JhunjhunewalaNews`;
+      await props.setSearch(localStorage.getItem("search"));
+      updateNews();
+    }
+    fetchData();
   }, []);
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/${
-      props.query ? `everything` : `top-headlines`
-    }?${
+    const url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&${
       props.query
         ? `q=${props.query}`
-        : `country=${props.country}&category=${props.category}&page=${page + 1}`
-    }${``}&apikey=${props.apiKey}`;
+        : `category=${props.category}&country=${props.country}&page=${page + 1}`
+    }`;
+    // const url = `https://newsapi.org/v2/${
+    //   props.query ? `everything` : `top-headlines`
+    // }?${
+    //   props.query
+    //     ? `q=${props.query}`
+    //     : `country=${props.country}&category=${props.category}&page=${page + 1}`
+    // }${``}&apikey=${props.apiKey}`;
     let data = await fetch(url);
     setPage(page + 1);
 
     let parsedData = await data.json();
 
-    setArticles(articles.concat(parsedData.articles));
+    setArticles(articles.concat(parsedData.results));
     setTotalResults(parsedData.totalResults);
   };
 
@@ -84,9 +99,9 @@ const News = (props) => {
                         ? element.description.slice(0, 88)
                         : ""
                     }
-                    imageUrl={element.urlToImage}
-                    newsUrl={element.url}
-                    author={element.author}
+                    imageUrl={element.image_url}
+                    newsUrl={element.link}
+                    author={element.creator}
                     date={element.pubDate}
                     source={element.source_id}
                   />

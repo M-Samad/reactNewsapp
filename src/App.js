@@ -7,10 +7,9 @@ import LoadingBar from "react-top-loading-bar";
 
 const App = () => {
   const pageSize = 20;
-  const apiKey = "b10bf4355532495e92c7b0c2b129d09c";
+  const apiKey = "pub_1373209636411ebe3b2d7828ea6b7d06d876b";
   const [progress, setProgress] = useState(0);
   const [search, setSearch] = useState("");
-  console.log(search);
   // pageSize = 5;
   // apiKey = process.env.REACT_APP_NEWS_API;
   // state = {
@@ -44,7 +43,8 @@ const App = () => {
               key="top"
               pageSize={pageSize}
               country="in"
-              category="general"
+              category="world"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/business">
@@ -55,6 +55,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="business"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/entertainment">
@@ -65,6 +66,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="entertainment"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/general">
@@ -75,6 +77,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="general"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/health">
@@ -85,6 +88,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="health"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/science">
@@ -95,6 +99,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="science"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/sports">
@@ -105,6 +110,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="sports"
+              setSearch={setSearch}
             />
           </Route>
           <Route exact path="/technology">
@@ -115,6 +121,7 @@ const App = () => {
               pageSize={pageSize}
               country="in"
               category="technology"
+              setSearch={setSearch}
             />
           </Route>
         </Switch>

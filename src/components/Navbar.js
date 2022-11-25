@@ -7,7 +7,7 @@ const Navbar = ({ search, setSearch }) => {
     <div>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/reactNewsapp">
             Jhunjhunewala-News
           </Link>
           <button
@@ -64,9 +64,8 @@ const Navbar = ({ search, setSearch }) => {
                 </Link>
               </li>
             </ul>
-            <Link className="nav-link" to={`/${search}`}>
-              <Search search={search} setSearch={setSearch} />
-            </Link>
+
+            <Search search={search} setSearch={setSearch} />
           </div>
         </div>
       </nav>

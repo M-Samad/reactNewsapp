@@ -8,11 +8,9 @@ function Search({ setSearch }) {
     localStorage.clear();
     localStorage.setItem("search", inputText);
     const input = localStorage.getItem("search");
-
     await setSearch("");
     e.preventDefault();
     setSearch(localStorage.getItem("search"));
-    console.log(input);
   };
 
   return (

@@ -11,7 +11,6 @@ const News = (props) => {
   const [totalResults, setTotalResults] = useState(0);
 
   const updateNews = async () => {
-    console.log(props.query);
     props.setProgress(10);
     const url = `https://newsdata.io/api/1/news?apikey=${props.apiKey}&${
       props.query
@@ -26,7 +25,6 @@ const News = (props) => {
     //     : `country=${props.country}&category=${props.category}&page=${page}`
     // }${``}&apikey=${props.apiKey}`;
     setLoading(true);
-    console.log(url);
     let data = await fetch(url);
     props.setProgress(30);
     let parsedData = await data.json();
